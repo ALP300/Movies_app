@@ -9,6 +9,7 @@ console.log(join(__dirname , 'views'))
 app.set('views', join(__dirname,'views'))
 app.use(indexRouter)
 
+app.use(express.static(join(__dirname,'public')))
 
 //D:\Movies_app\src\views
 
