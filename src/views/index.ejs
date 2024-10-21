@@ -14,6 +14,51 @@
     <h2>Soy leo y este es mi primer proyecto en nodeJS</h2>
     <h3>Holaaa a todos, bienvenidos</h3>
     <img src="/img/programador.jpg" >
+    
+    <div id="mostrarPeliculas">
+
+    </div>
+    <script>
+        async function getPeliculas() {
+            try{
+                const response= await fetch('http://localhost:3000/api/get-peliculas',{
+                    method: 'GET',
+                    headers:{'Content-Type':'application/json'},
+                })
+            
+            if(response.ok){
+                const peliculas= await response.json()
+                console.log("Las películas encontradas fueron: ")
+                console.log(peliculas)
+            }
+            }catch(error){
+
+            }
+        }
+        function mostrarpeliculas(peliculas){
+            const mostrarpeliculasDiv= document.getElementById('mostrarPeliculas')
+            mostrarpeliculasDiv.innerHTML=``
+            peliculas.forEach(peliculas=>{
+                const peliculasDiv= document.createElement('div')
+                peliculasDiv.classList.add('pelicula')
+                const titulo= document.createElement('h1')
+                titulo.textContent= peliculas.titulo
+                const imagen= document.createElement('src')
+                imagen.textContent= peliculas.url
+                imagen.src= peliculas.url
+                imagen.alt= peliculas.titulo
+                peliculasDiv.appendChild(titulo)
+                peliculasDiv.appendChild(imagen)
+                mostrarpeliculasDiv.appendChild(peliculasDiv)
+            })
+            
+        }
+
+
+        window.addEventListener('DOMContentLoaded', getPeliculas)
+    </script>
+    
     <%- include('partials/footer') %>
+
 </body>
 </html>
